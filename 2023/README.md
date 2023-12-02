@@ -2,3 +2,7 @@
 
 ## Rust?!
 
+`cd AoC2023`
+
+`cargo run`
+
