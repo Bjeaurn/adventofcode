@@ -1,21 +1,8 @@
-mod file;
+mod utils;
 
-use file::file_utils::load_file;
+mod day4;
+use day4::main as day;
+
 fn main() {
-    let file_name = "day1.txt".to_string();
-    let data = load_file(file_name).unwrap();
-    let lines = data.lines();
-
-    for line in lines {}
-}
-
-pub type DataID = i32;
-pub struct Data {
-    id: DataID,
-}
-
-impl Data {
-    fn do_things(&self) -> &DataID {
-        &self.id
-    }
+    day();
 }

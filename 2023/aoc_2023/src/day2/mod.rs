@@ -1,7 +1,5 @@
-mod file;
-
-use file::file_utils::load_file;
-fn main() {
+use super::utils::file_utils::load_file;
+pub fn main() {
     let file_name = "day2.txt".to_string();
     let data = load_file(file_name).unwrap();
     let lines = data.lines();
@@ -38,7 +36,7 @@ fn main() {
 
 pub fn parse_game(string: &str) -> Option<Game> {
     let mut iter = string.split(": ");
-    let id = iter.next()?.split_whitespace().last()?.parse().ok()?;
+    let id = iter.next()?.split_whitespace().last()?.parse();
     let round_data = iter.next()?.split("; ");
 
     let mut rounds = Vec::new();
