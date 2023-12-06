@@ -6,7 +6,7 @@ pub fn main() {
     let data = load_file(file_name).unwrap();
     let lines = data.lines();
     let mut cards: Vec<Card> = vec![];
-    let mut card_instances: HashMap<usize, i32> = HashMap::new();
+    let mut card_instances: HashMap<usize, u64> = HashMap::new();
 
     for line in lines {
         cards.push(Card::new(line));
@@ -28,7 +28,7 @@ pub fn main() {
         })
         .collect();
     println!("{:?}", card_instances);
-    let scores: Vec<(i16, i32)> = cards.iter().map(|card| card.score()).collect();
+    let scores: Vec<(u64, u64)> = cards.iter().map(|card| card.score()).collect();
     // let wins = scores
     //     .clone()
     //     .iter()
@@ -36,18 +36,18 @@ pub fn main() {
     //     .map(|(idx, (len, score))| (idx, len, score));
     // cards.iter().enumerate().
 
-    println!("{}", scores.iter().map(|(_, b)| b).sum::<i32>());
+    println!("{}", scores.iter().map(|(_, b)| b).sum::<u64>());
     println!(
         "{:?}",
         cards
             .iter()
             .enumerate()
             .map(|(idx, _)| card_instances.get(&idx).unwrap_or(&1))
-            .sum::<i32>()
+            .sum::<u64>()
     );
 }
 
-type Number = i16;
+type Number = u64;
 
 #[derive(Debug)]
 pub struct Card {
@@ -55,7 +55,7 @@ pub struct Card {
     winning: Vec<Number>,
     on_card: Vec<Number>,
     // instances: Number,
-    points: i32,
+    points: u64,
 }
 
 impl Card {
@@ -128,7 +128,7 @@ impl Card {
         }
     }
 
-    fn score(&self) -> (i16, i32) {
+    fn score(&self) -> (u64, u64) {
         let won_matches: Vec<Number> = self
             .winning
             .iter()
@@ -138,17 +138,17 @@ impl Card {
 
         // println!("{:?}", won_matches);
 
-        let len: i16 = won_matches.len() as i16;
-        let score: i32 = match len {
+        let len: u64 = won_matches.len() as u64;
+        let score: u64 = match len {
             0 => 0,
             1 => 1,
             len => 1 * (1 << (len - 1)),
-        } as i32;
+        } as u64;
         (len, score)
     }
 }
 
-// fn score(matches: usize) -> i32 {
+// fn score(matches: usize) -> u64 {
 //     match matches {
 //         0 => 0,
 //         1 => 1,

@@ -9,7 +9,7 @@ fn main() {
     for line in lines {}
 }
 
-pub type DataID = i32;
+pub type DataID = u64;
 pub struct Data {
     id: DataID,
 }

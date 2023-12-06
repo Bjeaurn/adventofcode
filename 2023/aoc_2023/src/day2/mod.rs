@@ -19,14 +19,14 @@ pub fn main() {
         })
         .collect();
 
-    let result_1: i32 = compatible_games.iter().map(|game| game.id).sum();
+    let result_1: u64 = compatible_games.iter().map(|game| game.id).sum();
 
-    let min_stones: Vec<(i32, i32, i32)> = games
+    let min_stones: Vec<(u64, u64, u64)> = games
         .iter()
         .map(|game| game.find_lowest_color())
-        .collect::<Vec<(i32, i32, i32)>>();
+        .collect::<Vec<(u64, u64, u64)>>();
 
-    let result_2: i32 = min_stones
+    let result_2: u64 = min_stones
         .iter()
         .map(|(red, green, blue)| red * green * blue)
         .sum();
@@ -74,7 +74,7 @@ impl Game {
             .collect()
     }
 
-    fn find_lowest_color(&self) -> (i32, i32, i32) {
+    fn find_lowest_color(&self) -> (u64, u64, u64) {
         let mut green = 0;
         let mut red = 0;
         let mut blue = 0;
@@ -91,13 +91,13 @@ impl Game {
 
 #[derive(Debug)]
 pub struct Game {
-    id: i32,
+    id: u64,
     rounds: Vec<Round>,
 }
 
 #[derive(Debug)]
 pub struct Round {
-    green: i32,
-    red: i32,
-    blue: i32,
+    green: u64,
+    red: u64,
+    blue: u64,
 }

@@ -19,7 +19,7 @@ fn main() {
 
     let mut results: Vec<String> = Vec::new();
     for line in lines {
-        let mut numbers: Vec<u32> = Vec::new();
+        let mut numbers: Vec<u64> = Vec::new();
 
         let mut string = line.to_string();
 
@@ -35,11 +35,11 @@ fn main() {
         }
         results.push(get(numbers));
     }
-    let total: i32 = results.iter().map(|s| s.parse::<i32>().unwrap()).sum();
+    let total: u64 = results.iter().map(|s| s.parse::<u64>().unwrap()).sum();
     println!("{:?}", total);
 }
 
-fn get(v: Vec<u32>) -> String {
+fn get(v: Vec<u64>) -> String {
     let f = v.first().unwrap();
     let l = v.last().unwrap();
     format!("{f}{l}")

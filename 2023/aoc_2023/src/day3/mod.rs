@@ -1,12 +1,12 @@
 use std::collections::HashMap;
 fn consider_number_neighbors(
     board: &Vec<String>,
-    gear_nums: &mut HashMap<(usize, usize), Vec<i32>>,
+    gear_nums: &mut HashMap<(usize, usize), Vec<u64>>,
     start_y: usize,
     start_x: usize,
     end_y: usize,
     end_x: usize,
-    num: i32,
+    num: u64,
 ) -> bool {
     for y in start_y..=end_y {
         for x in start_x..=end_x {
@@ -50,7 +50,7 @@ pub fn main() {
                 mat.end(),
                 mat.as_str().parse().unwrap(),
             ) {
-                total += mat.as_str().parse::<i32>().unwrap();
+                total += mat.as_str().parse::<u64>().unwrap();
             }
         }
     }
