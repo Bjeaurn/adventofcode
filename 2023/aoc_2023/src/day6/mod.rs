@@ -6,30 +6,42 @@ pub fn main() {
     let data = load_file(file_name).unwrap();
     let lines = data.lines().into_iter().enumerate();
 
-    let mut times: Vec<u32> = vec![];
-    let mut distances: Vec<u32> = vec![];
+    // let mut times: Vec<u32> = vec![];
+    let mut times: Vec<u64> = vec![];
+    // let mut distances: Vec<u32> = vec![];
+    let mut distances: Vec<u64> = vec![];
 
     for (idx, line) in lines {
         let split: Vec<&str> = line.split(":").collect();
         // println!("idx: {}, split, {:?}", idx, split);
         match idx {
             0 => {
-                times = split[1]
+                let str: String = split[1]
                     .trim()
                     .split_whitespace()
-                    .map(|v| v.parse::<u32>().unwrap())
-                    .collect()
+                    // .map(|v| v.parse::<u32>().unwrap())
+                    .map(|n| n.to_string())
+                    .collect();
+
+                times = vec![str.parse::<u64>().unwrap()];
             }
             1 => {
-                distances = split[1]
+                let str: String = split[1]
                     .trim()
                     .split_whitespace()
-                    .map(|v| v.parse::<u32>().unwrap())
-                    .collect()
+                    // .map(|v| v.parse::<u32>().unwrap())
+                    .map(|n| n.to_string())
+                    .collect();
+
+                println!("{}", str);
+
+                distances = vec![str.parse::<u64>().unwrap()];
             }
             _ => (),
         }
     }
+
+    println!("{:?} {:?}", times, distances);
 
     let mut wins: Vec<u32> = vec![];
 
