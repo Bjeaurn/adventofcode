@@ -68,14 +68,14 @@ pub fn main() {
     // let result = find_locations(&maps, &seeds);
     // println!("Final Result: {}", result);
 
-    let result_b: u64 = find_locations(&mut cache, &maps, &seeds_b);
+    let result_b: u64 = find_locations(&maps, &seeds_b);
     println!("Final Result part 2: {}", result_b);
 }
 
-fn find_locations(cache: &mut HashMap<u64, u64>, maps: &Vec<Map>, seeds: &Vec<u64>) -> u64 {
+fn find_locations(maps: &Vec<Map>, seeds: &Vec<u64>) -> u64 {
     let mut smallest = u64::MAX;
     for seed in seeds {
-        let result = find_location_for_seed(cache, maps, seed);
+        let result = find_location_for_seed(maps, seed);
         if result < smallest {
             println!("Result {} is smaller then smallest: {}", result, smallest);
             smallest = result;
@@ -83,25 +83,20 @@ fn find_locations(cache: &mut HashMap<u64, u64>, maps: &Vec<Map>, seeds: &Vec<u6
     }
     smallest
 }
+fn get_map_result(map: Map, input: u64) -> u64 {
+    map.get(input)
+}
 
-fn find_location_for_seed(cache: &mut HashMap<u64, u64>, maps: &Vec<Map>, seed: &u64) -> u64 {
+fn find_location_for_seed(maps: &Vec<Map>, seed: &u64) -> u64 {
     // println!("Checking seed: {}", seed);
     let mut result = seed.clone();
-    if cache.contains_key(seed) {
-        println!("cache hit: {}", seed);
-        return *cache.get(seed).unwrap();
-    }
     for map in maps {
         result = map.get(result);
         // println!("Map name: {}, result: {}", map.name, result);
     }
-    cache.insert(seed.clone(), result);
     result
 }
 
-fn get_map_result(map: Map, input: u64) -> u64 {
-    map.get(input)
-}
 
 impl Map {
     pub fn get(&self, input: u64) -> u64 {
