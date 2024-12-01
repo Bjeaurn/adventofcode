@@ -1,1 +1,0 @@
-/Users/bjeaurn/Development/adventofcode/aoc2024/target/debug/aoc2024: /Users/bjeaurn/Development/adventofcode/aoc2024/src/day1.rs /Users/bjeaurn/Development/adventofcode/aoc2024/src/main.rs /Users/bjeaurn/Development/adventofcode/aoc2024/src/utils/mod.rs
