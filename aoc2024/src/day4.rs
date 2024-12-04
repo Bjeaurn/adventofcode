@@ -1,7 +1,7 @@
 use super::utils::file_utils::load_file;
 
 pub fn main() {
-    let file_name = "day4_test.txt".to_string();
+    let file_name = "day4.txt".to_string();
     let data: String = load_file(file_name).unwrap();
     let map = create_map(data);
     let mut count = 0;
@@ -30,10 +30,44 @@ fn create_map(data: String) -> Vec<Vec<String>> {
 
 fn find_x_mas(x: usize, y: usize, map: &Vec<Vec<String>>) -> i32 {
     let mut count = 0;
-    if (map[y][x] == "A") {
-        println!("A found");
+    if map[y][x] == "A" {
+        if x.checked_sub(1).is_none() || y.checked_sub(1).is_none() {
+            return 0;
+        }
+        if x + 1 > map[y].len() - 1 || y + 1 > map.len() - 1 {
+            return 0;
+        }
+        if find_x(map, y, x, "M", "S") {
+            // println!("x: {x}, y: {y}");
+            count += 1;
+        }
     }
     return count;
+}
+
+fn find_x(map: &Vec<Vec<String>>, y: usize, x: usize, check1: &str, check2: &str) -> bool {
+    if map[y - 1][x - 1] == check1 && map[y - 1][x + 1] == check1 {
+        if map[y + 1][x - 1] == check2 && map[y + 1][x + 1] == check2 {
+            return true;
+        }
+    }
+    if map[y - 1][x - 1] == check2 && map[y - 1][x + 1] == check2 {
+        if map[y + 1][x - 1] == check1 && map[y + 1][x + 1] == check1 {
+            return true;
+        }
+    }
+
+    if map[y - 1][x - 1] == check2 && map[y - 1][x + 1] == check1 {
+        if map[y + 1][x - 1] == check2 && map[y + 1][x + 1] == check1 {
+            return true;
+        }
+    }
+    if map[y - 1][x - 1] == check1 && map[y - 1][x + 1] == check2 {
+        if map[y + 1][x - 1] == check1 && map[y + 1][x + 1] == check2 {
+            return true;
+        }
+    }
+    false
 }
 
 fn find_xmas(x: usize, y: usize, map: &Vec<Vec<String>>) -> i32 {
