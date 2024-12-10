@@ -1,7 +1,7 @@
 mod utils;
 
-mod day6;
-use day6::main as day;
+mod day10;
+use day10::main as day;
 
 fn main() {
     day();
